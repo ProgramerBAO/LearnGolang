@@ -43,7 +43,7 @@ func main() {
 	ch := make(chan string)
 
 	fmt.Println("学习课程:")
-	// 开启协程
+	// 开启协程 等待数据进入管道，否则造成死锁，这里发现 不需要取地址也可以全局修改channel
 	go PrintChan(ch)
 	// 从通道中接收数据
 	rec, ok := <-ch
@@ -54,4 +54,33 @@ func main() {
 		close(ch)
 	}
 
+	c1 := make(chan int)
+	go func() {
+		for i := 0; i < 10; i++ {
+			c1 <- i
+		}
+	}()
+	for i := 0; i < 10; i++ {
+		fmt.Println("c1", <-c1)
+	}
+	fmt.Println("------------------------------------------------")
+	c2 := make(chan int, 10)
+	go func() {
+		for i := 0; i < 10; i++ {
+			c2 <- i
+		}
+	}()
+	for i := 0; i < 10; i++ {
+		fmt.Println("c2", <-c2)
+	}
+	fmt.Println("------------------------------------------------")
+	c3 := make(chan int, 5)
+	go func() {
+		for i := 0; i < 10; i++ {
+			c3 <- i
+		}
+	}()
+	for i := 0; i < 10; i++ {
+		fmt.Println("c3", <-c3)
+	}
 }
