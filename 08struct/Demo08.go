@@ -35,6 +35,7 @@ type outer struct {
 }
 
 func test01() {
+	// 隐式声明
 	Bob := person{
 		name:  "bob",
 		age:   18,
@@ -153,6 +154,7 @@ func (l person) showPersonInfo(n int) {
 }
 
 // 我不明白这和上面有啥区别
+// 学习了一下指针，明白了
 func (p *person) addAge(n int) {
 	p.age = p.age + n
 	fmt.Println("addAge:", p.age)

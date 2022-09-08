@@ -4,7 +4,6 @@ import "fmt"
 
 /*
 	func condition() {
-
 			条件
 			if condition1{
 				逻辑代码
@@ -15,8 +14,6 @@ import "fmt"
 			}else {
 				逻辑代码 else
 			}
-
-
 	}
 */
 
@@ -36,7 +33,6 @@ func test01(n int) {
 func advanceBranch() {
 	/*
 		if statement;condition{
-
 		}
 	*/
 	if score := 88; score >= 60 {

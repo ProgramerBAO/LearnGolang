@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"time"
 )
 
@@ -22,10 +23,8 @@ func main() {
 		function functionName(parameterList)	{
 			业务逻辑代码
 		}
-
 		开启函数
 		functionNam(parameterList)
-
 		开启一个协程调用函数
 		go functionNam(parameterList)
 	*/
@@ -42,4 +41,16 @@ func main() {
 	}("hello world")
 	time.Sleep(time.Second)
 
+	// 使用协程管理器
+	var wg sync.WaitGroup
+	// 告诉它有多少协程
+	wg.Add(1)
+	// 传入地址 这样的话可以在方法内部改变外部的数据
+	go Run(&wg)
+	wg.Wait()
+}
+
+func Run(wg *sync.WaitGroup) {
+	fmt.Println("我跑起来了")
+	wg.Done()
 }

@@ -37,7 +37,6 @@ func main() {
 		if ok == true {
 			close(channelName)
 		}
-
 		通道可以有容量，并且可以设置只读只写 稍后再学
 		利用这种机制做锁
 	*/
